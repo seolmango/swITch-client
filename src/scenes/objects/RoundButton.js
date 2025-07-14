@@ -38,8 +38,8 @@ class RoundButton extends Phaser.GameObjects.Container {
         this.drawStroke(this.color_2);
         this.add(this.buttonStroke);
 
-        this.buttonText = this.scene.add.text(0, 0, this.text, {
-            font: "80px switch",
+        this.buttonText = this.scene.add.text(0, 0, this.text.text, {
+            font: `${this.text.size}px switch`,
             color: BUTTON_PALETTE.TEXT_DEFAULT,
         }).setOrigin(0.5);
         this.add(this.buttonText);

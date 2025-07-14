@@ -23,9 +23,12 @@ class TitleScene extends Phaser.Scene {
             720,
             120,
             1,
-            "Start Game",
+            {
+                text: "Start Game",
+                size: 80
+            },
             () => {
-                this.scene.start('GameScene'); // Assuming you have a GameScene to start
+                this.scene.start('roomListScene');
             }
         )
 
@@ -36,35 +39,28 @@ class TitleScene extends Phaser.Scene {
             720,
             120,
             0,
-            "How to Play",
+            {
+                text: "How to Play",
+                size: 80
+            },
             () => {
-                this.scene.start('SettingsScene'); // Assuming you have a SettingsScene to start
+                this.scene.start('SettingsScene');
             }
         );
 
         const userButton = new RoundButton(
-            this,
-            1548,
-            990,
-            120,
-            120,
-            2,
-            "①",
-            () => {
-                this.scene.start('UserProfileScene'); // Assuming you have a UserProfileScene to start
-            }
-        )
-
-        const creditsButton = new RoundButton(
             this,
             1692,
             990,
             120,
             120,
             2,
-            "©",
+            {
+                text: "①",
+                size: 80
+            },
             () => {
-                this.scene.start('CreditsScene'); // Assuming you have a CreditsScene to start
+                this.scene.start('UserProfileScene'); // Assuming you have a UserProfileScene to start
             }
         )
 
@@ -75,7 +71,10 @@ class TitleScene extends Phaser.Scene {
             120,
             120,
             2,
-            "②",
+            {
+                text: "②",
+                size: 80
+            },
             () => {
                 this.scene.start('SettingsScene'); // Assuming you have a SettingsScene to start
             }
