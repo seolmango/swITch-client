@@ -1,0 +1,54 @@
+{
+  "icons": [
+    {
+      "src": "/assets/icons/icon_512x512.cb9418024505c0a057829b33574fcc6f.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icons/icon_512x512.cb9418024505c0a057829b33574fcc6f.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon_384x384.cb9418024505c0a057829b33574fcc6f.webp",
+      "sizes": "384x384",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon_256x256.cb9418024505c0a057829b33574fcc6f.webp",
+      "sizes": "256x256",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon_192x192.cb9418024505c0a057829b33574fcc6f.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon_128x128.cb9418024505c0a057829b33574fcc6f.webp",
+      "sizes": "128x128",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon_96x96.cb9418024505c0a057829b33574fcc6f.webp",
+      "sizes": "96x96",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ],
+  "name": "swITch.io",
+  "short_name": "swITch",
+  "orientation": "landscape",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "Runaway from the tagger!",
+  "background_color": "#ffffff",
+  "theme_color": "#7FDFFF"
+}
