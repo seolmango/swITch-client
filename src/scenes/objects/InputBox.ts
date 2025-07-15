@@ -113,6 +113,13 @@ class InputBox extends Phaser.GameObjects.Container {
         this.inputText.setReadOnly(!isEditable);
         this.inputText.setStyle({ backgroundColor: isEditable ? 'transparent' : '#ddd' });
     }
+
+    blur() {
+        this.inputText.node.blur();
+    }
+    focus() {
+        this.inputText.node.focus();
+    }
 }
 
 export { InputBox };

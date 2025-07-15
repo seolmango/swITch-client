@@ -259,6 +259,14 @@ class TitleScene extends Phaser.Scene {
             }
         )
         this.loginPopup.add([emailLabel, emailInput, passwordLabel, passwordInput, forgetPasswordText])
+        this.dimmed.on('pointerdown', () => {
+            emailInput.blur();
+            passwordInput.blur();
+        })
+        box.on("pointerdown", () => {
+            emailInput.blur();
+            passwordInput.blur();
+        })
     }
 
     private closeLoginPopup() {
