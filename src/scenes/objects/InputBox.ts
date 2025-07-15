@@ -72,12 +72,12 @@ class InputBox extends Phaser.GameObjects.Container {
         let errorMessage = "";
 
         if (this.maxLength !== undefined && this.currentValue.length > this.maxLength) {
-            errorMessage = `최대 ${this.maxLength}자까지 입력 가능합니다`;
+            errorMessage = `length must be less than or equal to ${this.maxLength}`;
         } else {
             switch (this.inputType) {
                 case "normal":
                     isValid = /^[가-힣a-zA-Z0-9]*$/.test(this.currentValue);
-                    if (!isValid) errorMessage = "한글, 영어, 숫자만 가능합니다";
+                    if (!isValid) errorMessage = "only Korean, English, and numbers are allowed";
                     break;
                 case "email":
                     isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.currentValue);

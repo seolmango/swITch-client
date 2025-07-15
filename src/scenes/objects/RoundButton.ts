@@ -81,7 +81,10 @@ class RoundButton extends Phaser.GameObjects.Container {
             this.currentStrokeColor = strokeColor;
         });
 
-        this.on("pointerdown", onClick);
+        this.on("pointerdown", () => {
+            scene.input.setDefaultCursor('default');
+            onClick();
+        });
     }
 
     private redraw(bgColor: number, strokeColor: number) {
