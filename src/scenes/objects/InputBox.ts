@@ -35,7 +35,7 @@ class InputBox extends Phaser.GameObjects.Container {
         this.maxLength = config.maxLength;
 
         this.inputText = new rexInputText(config.scene, 0, 0, config.width, config.height, {
-            type: 'text',
+            type: this.inputType === "password" ? 'password' : 'text',
             placeholder: config.placeholder ?? '',
             fontSize: config.fontSize ?? '24px',
             border: 0,
@@ -56,16 +56,10 @@ class InputBox extends Phaser.GameObjects.Container {
 
     private handleTextChange() {
         if (!this.editable) return;
-
-        let rawValue = this.inputText.text;
-        if (this.inputType === "password") {
-            this.currentValue = rawValue;
-            this.inputText.setText('*'.repeat(rawValue.length));
-        } else {
-            this.currentValue = rawValue;
-        }
+        this.currentValue = this.inputText.text;
         this.validate();
     }
+
 
     private validate() {
         let isValid = false;
