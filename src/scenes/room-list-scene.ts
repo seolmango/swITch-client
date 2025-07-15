@@ -23,7 +23,7 @@ class RoomListScene extends Phaser.Scene {
             }
         ).setOrigin(0.5)
 
-        new RoundBox(
+        const roomListBG = new RoundBox(
             this,
             960,
             520,
@@ -95,6 +95,12 @@ class RoomListScene extends Phaser.Scene {
 
             }
         )
+
+        this.add.existing(roomListBG)
+        this.add.existing(BackButton);
+        this.add.existing(MakeNewRoomButton);
+        this.add.existing(QuickJoinButton);
+        this.add.existing(JoinRoomButton);
     }
 }
 

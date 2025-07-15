@@ -38,7 +38,7 @@ class RoundButton extends Phaser.GameObjects.Container {
         this.setSize(btnWidth, btnHeight);
         this.setInteractive(
             new Phaser.Geom.Rectangle(0, 0, btnWidth, btnHeight),
-            Phaser.Geom.Rectangle.Contains
+            Phaser.Geom.Rectangle.Contains,
         );
 
         const palettes = {
@@ -66,6 +66,7 @@ class RoundButton extends Phaser.GameObjects.Container {
         this.redraw(this.currentBgColor, this.currentStrokeColor);
 
         this.on("pointerover", () => {
+            scene.input.setDefaultCursor('pointer');
             scene.tweens.add({ targets: this, scale: 1.05, duration: 100, ease: "Power2" });
             this.tweenColors(this.currentBgColor, strokeColor, this.currentStrokeColor, hoverStrokeColor, this.currentTextColor, BUTTON_PALETTE.TEXT_ON_MOUSE);
             this.currentBgColor = strokeColor;
@@ -73,6 +74,7 @@ class RoundButton extends Phaser.GameObjects.Container {
         });
 
         this.on("pointerout", () => {
+            scene.input.setDefaultCursor('default');
             scene.tweens.add({ targets: this, scale: 1, duration: 100, ease: "Power2" });
             this.tweenColors(this.currentBgColor, bgColor, this.currentStrokeColor, strokeColor, this.currentTextColor, BUTTON_PALETTE.TEXT_DEFAULT);
             this.currentBgColor = bgColor;
@@ -80,8 +82,6 @@ class RoundButton extends Phaser.GameObjects.Container {
         });
 
         this.on("pointerdown", onClick);
-
-        scene.add.existing(this);
     }
 
     private redraw(bgColor: number, strokeColor: number) {

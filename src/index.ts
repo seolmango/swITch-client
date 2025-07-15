@@ -17,10 +17,13 @@ function init() {
             autoCenter: Phaser.Scale.CENTER_BOTH,
         },
         scene: [
-            RoomListScene,
-            TitleScene
+            TitleScene,
+            RoomListScene
         ],
         backgroundColor: '#FFFFFF',
+        dom: {
+            createContainer: true
+        },
         plugins: {
             scene: [
                 {
