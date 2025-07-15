@@ -6,23 +6,9 @@
     src: url(fonts/switch-Bold.woff2) format("woff2");
 }
 
-canvas {
-    border: 0px solid black;
-}
-
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-#app {
-    width: 95%;
-    height: 95%;
 }
 
 
