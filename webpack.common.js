@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import webpack from 'webpack';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
+import os from 'os';
 
 export default (env, argv) => {
     const isProduction = argv.mode === 'production';
@@ -126,7 +127,7 @@ export default (env, argv) => {
                 __SERVER_URL__: "https://localhost:3000",
                 __IS_DEVELOPMENT__: !isProduction,
                 __BUILD_VERSION__: JSON.stringify(new Date().toISOString()),
-                __BUILD_ENV__: JSON.stringify((process.platform + "-" + process.arch))
+                __BUILD_ENV__: JSON.stringify(process.platform + "-" + process.arch + "(" + os.hostname() + "," + os.release() + ")")
             }),
             isAnalysis && new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
