@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
-import { BUTTON_PALETTE } from './objects/palette.js'
-import { RoundBox } from "./objects/RoundBox.js";
-import {RoundButton} from "./objects/RoundButton.js";
+import { BUTTON_PALETTE } from './objects/palette'
+import { RoundBox } from "./objects/RoundBox";
+import {RoundButton} from "./objects/RoundButton";
 
 class RoomListScene extends Phaser.Scene {
     constructor() {
@@ -19,7 +19,7 @@ class RoomListScene extends Phaser.Scene {
             "Room List",
             {
                 font: '80px switch',
-                color: BUTTON_PALETTE.TEXT_DEFAULT,
+                color: BUTTON_PALETTE.TEXT_DEFAULT_HEX,
             }
         ).setOrigin(0.5)
 

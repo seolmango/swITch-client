@@ -15,12 +15,15 @@ export default (env, argv) => {
 
     return {
         mode: isProduction ? 'production' : 'development',
-        entry: './src/index.js',
+        entry: './src/index.ts',
         output: {
             filename: isProduction ? 'bundle_[contenthash].js' : 'bundle.js',
             path: path.resolve(__dirname, './dist'),
             clean: true,
             assetModuleFilename: 'assets/[name][ext]',
+        },
+        resolve: {
+            extensions: ['.ts', '.tsx', '.js'],
         },
         module: {
             rules: [
@@ -43,6 +46,11 @@ export default (env, argv) => {
                     generator: {
                         filename: 'fonts/[name][ext]'
                     }
+                },
+                {
+                    test: /\.ts$/,
+                    exclude: /node_modules/,
+                    use: 'ts-loader',
                 },
                 {
                     test: /\.js$/,

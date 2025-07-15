@@ -8,9 +8,11 @@ export const BUTTON_PALETTE = {
     GRAY_1: 0x9F9F9F,
     GRAY_2: 0x7F7F7F,
     GRAY_3: 0x676767,
-    TEXT_DEFAULT: "#414141",
-    TEXT_ON_MOUSE: "#FFFFFF"
-}
+    TEXT_DEFAULT: 0x414141,
+    TEXT_ON_MOUSE: 0xFFFFFF,
+    TEXT_DEFAULT_HEX: "#414141",
+    TEXT_ON_MOUSE_HEX: "#FFFFFF",
+} as const;
 
 export const PLAYER_PALETTE = {
     P1_INSIDE: "#FFCCCC",
@@ -30,4 +32,4 @@ export const PLAYER_PALETTE = {
     P8_INSIDE: "#D7A060",
     P8_OUTSIDE: "#AC8250",
     TAGGER_OUTSIDE: "#676767"
-}
+} as const;

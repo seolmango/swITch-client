@@ -1,6 +1,7 @@
 import Phaser from "phaser";
-import { RoundButton } from "./objects/RoundButton.js";
+import { RoundButton } from "./objects/RoundButton";
 import logoTitle from "../assets/title_logo.webp"
+import { BUTTON_PALETTE } from "./objects/palette";
 
 class TitleScene extends Phaser.Scene {
     constructor() {
@@ -87,9 +88,9 @@ class TitleScene extends Phaser.Scene {
                 1040,
                 `Build: ${__BUILD_VERSION__} on ${__BUILD_ENV__}`,
                 {
-                    font: "30px Arial",
-                    fill: "#ffffff",
-                    align: "left"
+                    font: "30px switch",
+                    align: "left",
+                    color: BUTTON_PALETTE.TEXT_DEFAULT_HEX
                 }
             )
         }

@@ -3,8 +3,8 @@ import './style.css'
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import WebFont from 'webfontloader'
 
-import TitleScene from "./scenes/title-scene.js";
-import RoomListScene from "./scenes/room-list-scene.js";
+import TitleScene from "./scenes/title-scene";
+import RoomListScene from "./scenes/room-list-scene";
 
 function init() {
     const config = {
@@ -20,7 +20,7 @@ function init() {
             RoomListScene,
             TitleScene
         ],
-        backgroundColor: '#000000',
+        backgroundColor: '#FFFFFF',
         plugins: {
             scene: [
                 {
