@@ -97,7 +97,7 @@ class RoomListScene extends Phaser.Scene {
                 size: 60
             },
             () => {
-
+                this.showJoinRoomPopUp()
             }
         )
 
@@ -146,7 +146,7 @@ class RoomListScene extends Phaser.Scene {
             1080,
             0x000000,
             0.3
-        ).setDepth(100).setInteractive();
+        ).setDepth(100).setInteractive()
         this.popUp = this.add.container(160, 90).setDepth(120);
         const box = new RoundBox(
             this,
@@ -280,6 +280,122 @@ class RoomListScene extends Phaser.Scene {
         this.popUp.add([box, makeRoomButton, cancelButton, titleText,
                         roomNameLabel, publicLabel, lockLabel, passwordLabel,
                         roomNameInput, passwordInput, publicCheckbox, lockCheckbox]);
+        this.dimmed.on('pointerdown', () => {
+            roomNameInput.blur();
+            passwordInput.blur();
+        });
+        box.on("pointerdown", () => {
+            roomNameInput.blur();
+            passwordInput.blur();
+        })
+    }
+
+    private showJoinRoomPopUp (room_id: string = "") {
+        if (this.popUp) return;
+        this.dimmed = this.add.rectangle(
+            960,
+            540,
+            1920,
+            1080,
+            0x000000,
+            0.3
+        ).setDepth(100).setInteractive();
+        this.popUp = this.add.container(160, 90).setDepth(120);
+        const box = new RoundBox(
+            this,
+            800,
+            450,
+            1600,
+            900,
+            2
+        )
+        const joinButton = new RoundButton(
+            this,
+            500,
+            800,
+            450,
+            100,
+            1,
+            {
+                text: "Join Room",
+                size: 60
+            },
+            () => {
+
+            }
+        )
+        const cancelButton = new RoundButton(
+            this,
+            1100,
+            800,
+            450,
+            100,
+            0,
+            {
+                text: "Cancel",
+                size: 60
+            },
+            () => {
+                this.closePopUp();
+            }
+        )
+        const titleText = this.add.text(
+            800,
+            80,
+            "Join Room",
+            {
+                font: '80px switch',
+                align: 'center',
+                color: BUTTON_PALETTE.TEXT_DEFAULT_HEX,
+            }
+        ).setOrigin(0.5);
+
+        const roomIDLabel = this.add.text(
+            100,
+            300,
+            "Room ID:",
+            {
+                font: '60px switch',
+                align: 'left',
+                color: BUTTON_PALETTE.TEXT_DEFAULT_HEX,
+            }
+        )
+        const roomIDInput = new InputBox({
+            scene: this,
+            x: 500,
+            y: 300,
+            width: 1000,
+            height: 80,
+            fontSize: "70px",
+            placeholder: "Room ID",
+            type: "normal",
+            maxLength: 20,
+        })
+        roomIDInput.setValue(room_id);
+        const passwordLabel = this.add.text(
+            100,
+            500,
+            "Password:",
+            {
+                font: '60px switch',
+                align: 'left',
+                color: BUTTON_PALETTE.TEXT_DEFAULT_HEX,
+            }
+        )
+        const passwordInput = new InputBox({
+            scene: this,
+            x: 500,
+            y: 500,
+            width: 1050,
+            height: 80,
+            fontSize: "60px",
+            placeholder: "Password (optional)",
+            type: "password",
+            maxLength: 20
+        })
+
+        this.popUp.add([box, joinButton, cancelButton, titleText,
+                        roomIDLabel, passwordLabel, roomIDInput, passwordInput]);
     }
 
     private closePopUp() {
