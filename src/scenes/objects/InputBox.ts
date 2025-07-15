@@ -46,7 +46,7 @@ class InputBox extends Phaser.GameObjects.Container {
         }).on('textchange', () => this.handleTextChange()).setOrigin(0, 0);
 
         this.underline = config.scene.add.rectangle(0, config.height, config.width, 10, this.invalidColor).setOrigin(0, 0);
-        this.errorText = config.scene.add.text(0, config.height+5, "", { fontSize: "50px", color: BUTTON_PALETTE.RED_2_HEX, fontFamily: "switch" }).setOrigin(0, 0);
+        this.errorText = config.scene.add.text(0, config.height+5, "", { fontSize: "40px", color: BUTTON_PALETTE.RED_2_HEX, fontFamily: "switch" }).setOrigin(0, 0);
 
         this.add([this.inputText, this.underline, this.errorText]);
         this.setSize(config.width, config.height + 50);
@@ -108,17 +108,32 @@ class InputBox extends Phaser.GameObjects.Container {
         return this.lastValidationResult;
     }
 
-    public setEditable(isEditable: boolean) {
+    public setEditable(isEditable: boolean, reason: string = "") {
         this.editable = isEditable;
         this.inputText.setReadOnly(!isEditable);
-        this.inputText.setStyle({ backgroundColor: isEditable ? 'transparent' : '#ddd' });
+        if (isEditable) {
+            this.validate();
+        }else{
+            this.underline.setFillStyle(this.invalidColor);
+            this.errorText.setText(reason);
+        }
     }
 
-    blur() {
+    public blur() {
         this.inputText.node.blur();
     }
-    focus() {
+    public focus() {
         this.inputText.node.focus();
+    }
+    public hide() {
+        this.inputText.setVisible(false);
+        this.underline.setVisible(false);
+        this.errorText.setVisible(false);
+    }
+    public show() {
+        this.inputText.setVisible(true);
+        this.underline.setVisible(true);
+        this.errorText.setVisible(true);
     }
 }
 
