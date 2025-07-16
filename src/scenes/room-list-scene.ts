@@ -4,17 +4,23 @@ import { RoundBox } from "./objects/RoundBox";
 import {RoundButton} from "./objects/RoundButton";
 import { InputBox } from "./objects/InputBox";
 import { RoundCheckbox } from "./objects/RoundCheckBox";
+import { RoomItem } from "./objects/RoomItem";
 
 // 테스트용 더미 데이터
 const dummyRooms = [
     {"room_id":"425e4b83","room_name":"asdf","owner_name":"Guest_4293dc","password_exist":false,"player_count":1,"room_status":false,"map_id":0},
-    {"room_id":"c4524440","room_name":"adfse","owner_name":"Guest_a6d8fc","password_exist":false,"player_count":1,"room_status":false,"map_id":0},
+    {"room_id":"c4524440","room_name":"adfse","owner_name":"Guest_a6d8fc","password_exist":false,"player_count":1,"room_status":true,"map_id":0},
     {"room_id":"9db541aa","room_name":"adfsedf","owner_name":"Guest_b823a9","password_exist":true,"player_count":1,"room_status":false,"map_id":0}
 ];
+const dummyPage = {
+    current: 1,
+    max: 3
+}
 
 class RoomListScene extends Phaser.Scene {
     private popUp?: Phaser.GameObjects.Container;
     private dimmed?: Phaser.GameObjects.Rectangle;
+    private pageText?: Phaser.GameObjects.Text;
 
     constructor() {
         super({key: 'roomListScene'});
@@ -119,7 +125,12 @@ class RoomListScene extends Phaser.Scene {
                 text: ">",
                 size: 60
             },
-            () => {}
+            () => {
+                if (dummyPage.current < dummyPage.max) {
+                    dummyPage.current++;
+                    this.redrawPage();
+                }
+            }
         )
         const pageDownButton = new RoundButton(
             this,
@@ -132,9 +143,13 @@ class RoomListScene extends Phaser.Scene {
                 text: "<",
                 size: 60
             },
-            () => {}
+            () => {
+                if (dummyPage.current > 1) {
+                    dummyPage.current--;
+                    this.redrawPage();
+                }
+            }
         )
-
         this.add.existing(roomListBG)
         this.add.existing(backButton);
         this.add.existing(makeNewRoomButton);
@@ -142,6 +157,39 @@ class RoomListScene extends Phaser.Scene {
         this.add.existing(joinRoomButton);
         this.add.existing(pageUpButton);
         this.add.existing(pageDownButton);
+        this.redrawPage()
+
+        const x_list = [560, 1360];
+        const y_list = [250, 455, 660];
+        for( let i = 0; i < dummyRooms.length; i++) {
+            const roomInfo = dummyRooms[i];
+            const roomItem = new RoomItem(
+                this,
+                x_list[i % 2],
+                y_list[Math.floor(i / 2)],
+                roomInfo,
+                () => {
+                    this.closePopUp();
+                    this.showJoinRoomPopUp(roomInfo.room_id, roomInfo.password_exist)
+                }
+            );
+            this.add.existing(roomItem);
+        }
+    }
+
+    private redrawPage() {
+        if (this.pageText) {
+            this.pageText.destroy();
+        }
+        this.pageText = this.add.text(
+            960,
+            830,
+            `Page ${dummyPage.current} / ${dummyPage.max}`,
+            {
+                font: '60px switch',
+                color: BUTTON_PALETTE.TEXT_DEFAULT_HEX,
+            }
+        ).setOrigin(0.5);
     }
 
     private showMakeRoomPopUp() {
@@ -297,7 +345,7 @@ class RoomListScene extends Phaser.Scene {
         })
     }
 
-    private showJoinRoomPopUp (room_id: string = "") {
+    private showJoinRoomPopUp (room_id: string = "", locked: boolean = false) {
         if (this.popUp) return;
         this.dimmed = this.add.rectangle(
             960,
@@ -400,6 +448,7 @@ class RoomListScene extends Phaser.Scene {
             type: "password",
             maxLength: 20
         })
+        passwordInput.setEditable(locked, "Password is not required");
 
         this.popUp.add([box, joinButton, cancelButton, titleText,
                         roomIDLabel, passwordLabel, roomIDInput, passwordInput]);
