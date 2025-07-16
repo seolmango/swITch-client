@@ -86,10 +86,24 @@ class TitleScene extends Phaser.Scene {
                 this.scene.start('SettingsScene'); // Assuming you have a SettingsScene to start
             }
         )
+        const developerButton = new RoundButton(
+            this,
+            1836,
+            90,
+            120,
+            120,
+            2,
+            {
+                text: "⑦",
+                size: 80
+            },
+            () => {}
+        )
         this.add.existing(startButton);
         this.add.existing(howtoplayButton);
         this.add.existing(userButton);
         this.add.existing(SettingButton);
+        this.add.existing(developerButton);
 
         if(__IS_DEVELOPMENT__) {
             const versionText = this.add.text(
