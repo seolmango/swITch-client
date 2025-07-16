@@ -111,7 +111,7 @@ export default (env, argv) => {
                 skipWaiting: true,
                 runtimeCaching: [
                     {
-                        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|mp3|wav|ogg|json|webp|woff2)$/,
+                        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|mp3|wav|ogg|json|webp|woff2|woff)$/,
                         handler: 'CacheFirst',
                         options: {
                             cacheName: 'game-assets-cache',

@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'switch';
-    src: url('./assets/switch-Bold.woff2') format("woff2");
+    src: url('./assets/switch.woff2') format("woff2"),
+        url("./assets/switch.woff") format("woff");
 }
 
 body {

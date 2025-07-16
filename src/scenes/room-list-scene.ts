@@ -5,6 +5,13 @@ import {RoundButton} from "./objects/RoundButton";
 import { InputBox } from "./objects/InputBox";
 import { RoundCheckbox } from "./objects/RoundCheckBox";
 
+// 테스트용 더미 데이터
+const dummyRooms = [
+    {"room_id":"425e4b83","room_name":"asdf","owner_name":"Guest_4293dc","password_exist":false,"player_count":1,"room_status":false,"map_id":0},
+    {"room_id":"c4524440","room_name":"adfse","owner_name":"Guest_a6d8fc","password_exist":false,"player_count":1,"room_status":false,"map_id":0},
+    {"room_id":"9db541aa","room_name":"adfsedf","owner_name":"Guest_b823a9","password_exist":true,"player_count":1,"room_status":false,"map_id":0}
+];
+
 class RoomListScene extends Phaser.Scene {
     private popUp?: Phaser.GameObjects.Container;
     private dimmed?: Phaser.GameObjects.Rectangle;
