@@ -20,6 +20,8 @@ class RoundButton extends Phaser.GameObjects.Container {
     private readonly btnWidth: number;
     private readonly btnHeight: number;
 
+    private enabled: boolean = true;
+
     constructor(
         scene: Phaser.Scene,
         x: number,
@@ -66,6 +68,7 @@ class RoundButton extends Phaser.GameObjects.Container {
         this.redraw(this.currentBgColor, this.currentStrokeColor);
 
         this.on("pointerover", () => {
+            if (!this.enabled) return;
             scene.input.setDefaultCursor('pointer');
             scene.tweens.add({ targets: this, scale: 1.05, duration: 100, ease: "Power2" });
             this.tweenColors(this.currentBgColor, strokeColor, this.currentStrokeColor, hoverStrokeColor, this.currentTextColor, BUTTON_PALETTE.TEXT_ON_MOUSE);
@@ -74,6 +77,7 @@ class RoundButton extends Phaser.GameObjects.Container {
         });
 
         this.on("pointerout", () => {
+            if (!this.enabled) return;
             scene.input.setDefaultCursor('default');
             scene.tweens.add({ targets: this, scale: 1, duration: 100, ease: "Power2" });
             this.tweenColors(this.currentBgColor, bgColor, this.currentStrokeColor, strokeColor, this.currentTextColor, BUTTON_PALETTE.TEXT_DEFAULT);
@@ -82,9 +86,22 @@ class RoundButton extends Phaser.GameObjects.Container {
         });
 
         this.on("pointerdown", () => {
+            if (!this.enabled) return;
             scene.input.setDefaultCursor('default');
             onClick();
         });
+    }
+
+    public setEnabled(enabled: boolean) {
+        this.enabled = enabled;
+        this.alpha = enabled ? 1.0 : 0.5;
+        this.disableInteractive();
+        if (enabled) {
+            this.setInteractive(
+                new Phaser.Geom.Rectangle(0, 0, this.btnWidth, this.btnHeight),
+                Phaser.Geom.Rectangle.Contains,
+            );
+        }
     }
 
     private redraw(bgColor: number, strokeColor: number) {

@@ -14,6 +14,8 @@ interface InputBoxConfig {
     placeholder?: string;
     type: InputType;
     maxLength?: number;
+    onChange?: () => void;
+    customValidation?: {test: (value: string)=> boolean, message: string};
 }
 
 class InputBox extends Phaser.GameObjects.Container {
@@ -24,6 +26,8 @@ class InputBox extends Phaser.GameObjects.Container {
     private currentValue: string = "";
     private editable: boolean = true;
     private maxLength?: number;
+    private onChange?: () => void;
+    private customValidation?: {test: (value: string)=> boolean, message: string};
     private lastValidationResult: boolean = false;
     private readonly validColor = BUTTON_PALETTE.BLUE_2;
     private readonly invalidColor = BUTTON_PALETTE.RED_2;
@@ -50,14 +54,19 @@ class InputBox extends Phaser.GameObjects.Container {
 
         this.add([this.inputText, this.underline, this.errorText]);
         this.setSize(config.width, config.height + 50);
+        this.customValidation = config.customValidation;
 
         this.validate();
+        this.onChange = config.onChange;
     }
 
     private handleTextChange() {
         if (!this.editable) return;
         this.currentValue = this.inputText.text;
         this.validate();
+        if(this.onChange) {
+            this.onChange();
+        }
     }
 
 
@@ -80,6 +89,13 @@ class InputBox extends Phaser.GameObjects.Container {
                 case "password":
                     isValid = true;
                     break;
+            }
+        }
+        if(this.customValidation) {
+            const customValid = this.customValidation.test(this.currentValue);
+            if (isValid && !customValid) {
+                isValid = false;
+                errorMessage = this.customValidation.message;
             }
         }
 

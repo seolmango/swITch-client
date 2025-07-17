@@ -21,7 +21,8 @@ class UnderLineText extends Phaser.GameObjects.Container {
         y: number,
         textContent: string,
         settings: fontSettings,
-        onMouseColor: color
+        onMouseColor: color,
+        onClick: () => void
     ) {
         super(scene, x, y);
         this.text = scene.add.text(
@@ -61,7 +62,7 @@ class UnderLineText extends Phaser.GameObjects.Container {
             this.underline.lineTo(this.text.width / 2, this.text.height / 2);
             this.underline.closePath();
             this.underline.strokePath();
-        });
+        }).on('pointerdown', onClick);
         this.add(this.text);
         this.add(this.underline);
     }
