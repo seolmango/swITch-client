@@ -193,7 +193,7 @@ class RoomListScene extends Phaser.Scene {
     }
 
     private showMakeRoomPopUp() {
-        if (this.popUp) return;
+        if (this.popUp) {this.closePopUp()}
         this.dimmed = this.add.rectangle(
             960,
             540,
@@ -346,7 +346,7 @@ class RoomListScene extends Phaser.Scene {
     }
 
     private showJoinRoomPopUp (room_id: string = "", locked: boolean = false) {
-        if (this.popUp) return;
+        if (this.popUp){this.closePopUp()}
         this.dimmed = this.add.rectangle(
             960,
             540,
@@ -376,7 +376,7 @@ class RoomListScene extends Phaser.Scene {
                 size: 60
             },
             () => {
-
+                this.scene.start("WaitingRoomScene")
             }
         )
         const cancelButton = new RoundButton(

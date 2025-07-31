@@ -83,7 +83,7 @@ class TitleScene extends Phaser.Scene {
                 size: 80
             },
             () => {
-                this.scene.start('SettingsScene'); // Assuming you have a SettingsScene to start
+
             }
         )
         const developerButton = new RoundButton(

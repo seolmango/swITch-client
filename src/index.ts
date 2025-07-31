@@ -5,6 +5,7 @@ import WebFont from 'webfontloader'
 
 import TitleScene from "./scenes/title-scene";
 import RoomListScene from "./scenes/room-list-scene";
+import WaitingRoomScene from "./scenes/waiting-room-scene";
 
 function init() {
     const config = {
@@ -18,7 +19,8 @@ function init() {
         },
         scene: [
             TitleScene,
-            RoomListScene
+            RoomListScene,
+            WaitingRoomScene
         ],
         backgroundColor: '#FFFFFF',
         dom: {
